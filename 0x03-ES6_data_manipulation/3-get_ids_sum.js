@@ -7,7 +7,7 @@ export default function getStudentIdsSum(studentsArray) {
 
   const sumOfIds = studentsArray.reduce(
     (previousValue, currentValue) => previousValue + currentValue.id,
-    initialValue
+    initialValue,
   );
   return sumOfIds;
 }

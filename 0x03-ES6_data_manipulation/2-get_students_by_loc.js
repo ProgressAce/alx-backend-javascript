@@ -5,7 +5,7 @@ export default function getStudentsByLocation(studentsArray, city) {
     */
 
   // edge case
-  if (!Array.isArray(studentsArray) || !(typeof city === "string")) {
+  if (!Array.isArray(studentsArray) || !(typeof city === 'string')) {
     return [];
   }
 
