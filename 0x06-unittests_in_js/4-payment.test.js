@@ -8,6 +8,7 @@ const sendPaymentRequestToApi = require("./4-payment.js");
 const Utils = require("./utils.js");
 
 describe("Testing <sendPaymentRequestToApi> function.", function () {
+  /*
   it("1. Ensure the Utils' function is called", function () {
     const utilsStub = sinon.spy(Utils, "calculateNumber");
     sendPaymentRequestToApi(500, 40);
@@ -15,7 +16,7 @@ describe("Testing <sendPaymentRequestToApi> function.", function () {
     expect(utilsStub.calledOnce).to.be.true;
     utilsStub.restore();
   });
-  /*
+
   it("2. Gives Utils' function the correct arguments", function () {
     const utilsSpy = sinon.spy(Utils, "calculateNumber");
     sendPaymentRequestToApi(500, 40);
@@ -25,7 +26,7 @@ describe("Testing <sendPaymentRequestToApi> function.", function () {
   });
 */
   // Imitating an epensive/taxing operation
-  it("3. Verify that correct arguments are called", function () {
+  it("1. Verify that correct arguments are called and math is the same", function () {
     const calculateNumberStub = sinon
       .stub(Utils, "calculateNumber")
       .returns(10);
