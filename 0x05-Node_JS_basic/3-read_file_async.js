@@ -1,18 +1,18 @@
 // Reading a file asynchronously with Node JS
-const fs = require("fs");
+const fs = require('fs');
 
 function countStudents(path) {
   const promise = new Promise((resolve, reject) => {
-    fs.readFile(path, "utf-8", (error, data) => {
+    fs.readFile(path, 'utf-8', (error, data) => {
       if (error) {
         reject(error);
       } else {
-        let httpResponse = "";
-        let tempLine = "";
+        let httpResponse = '';
+        let tempLine = '';
 
         // splits the string data from file into lines
         // then filter out falsy elements that resulted from empty lines
-        let csvLines = data.split("\r\n").splice(1);
+        let csvLines = data.split('\r\n').splice(1);
         csvLines = csvLines.filter((line) => line);
 
         tempLine = `Number of students: ${csvLines.length}\n`;
@@ -21,7 +21,7 @@ function countStudents(path) {
 
         const fieldStudents = {};
         for (const line of csvLines) {
-          const splitLine = line.split(",");
+          const splitLine = line.split(',');
           const field = splitLine[3];
           const student = [];
           student.push(splitLine[0], splitLine[1], splitLine[2]);
@@ -61,12 +61,10 @@ function countStudents(path) {
   });
 
   return promise.then(
-    (httpResponse) => {
-      return httpResponse;
-    },
+    (httpResponse) => httpResponse,
     () => {
-      throw new Error("Cannot load the database");
-    }
+      throw new Error('Cannot load the database');
+    },
   );
 }
 
