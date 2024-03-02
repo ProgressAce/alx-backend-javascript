@@ -27,16 +27,14 @@ describe("Testing <sendPaymentRequestToApi> function.", function () {
 */
   // Imitating an epensive/taxing operation
   it("1. Verify that correct arguments are called and math is the same", function () {
-    const calculateNumberStub = sinon
-      .stub(Utils, "calculateNumber")
-      .returns(10);
-    const consLogSpy = sinon.spy(console, "log");
+    const stub = sinon.stub(Utils, "calculateNumber").returns(10);
+    const spy = sinon.spy(console, "log");
 
     sendPaymentRequestToApi(100, 20);
-    expect(calculateNumberStub.calledWithExactly("SUM", 100, 20)).to.be.true;
-    expect(consLogSpy.calledWithExactly("The total is: 10")).to.be.true;
+    expect(stub.calledWithExactly("SUM", 100, 20)).to.be.true;
+    expect(spy.calledWithExactly("The total is: 10")).to.be.true;
 
-    calculateNumberStub.restore();
-    consLogSpy.restore();
+    stub.restore();
+    spy.restore();
   });
 });
