@@ -6,13 +6,15 @@ const sinon = require("sinon");
 const request = require("request");
 
 describe("Integration Test - server feedback", function () {
-  describe("GET / route", function () {
-    it("Returns `Welcome to the payment system` with 200 status response", function (done) {
-      request.get("http://localhost:7865/", function (err, res, body) {
-        expect(res.statusCode).to.be.equal(200);
-        expect(body).to.be.equal("Welcome to the payment system");
-      });
-      done();
+  it("GET / returns `Welcome to the payment system` - status code 200", function (done) {
+    const options = {
+      url: "http://localhost:7865",
+      method: "GET",
+    };
+    request(options, function (err, res, body) {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal("Welcome to the payment system");
     });
+    done();
   });
 });
