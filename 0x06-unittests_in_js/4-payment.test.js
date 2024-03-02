@@ -8,7 +8,6 @@ const sendPaymentRequestToApi = require("./4-payment.js");
 const Utils = require("./utils.js");
 
 describe("Testing <sendPaymentRequestToApi> function.", function () {
-  /*
   it("1. Ensure the Utils' function is called", function () {
     const utilsStub = sinon.spy(Utils, "calculateNumber");
     sendPaymentRequestToApi(500, 40);
@@ -24,7 +23,7 @@ describe("Testing <sendPaymentRequestToApi> function.", function () {
     expect(utilsSpy.calledWithExactly("SUM", 500, 40)).to.be.true;
     utilsSpy.restore();
   });
-*/
+
   // Imitating an epensive/taxing operation
   it("1. Verify that correct arguments are called and math is the same", function () {
     const stub = sinon.stub(Utils, "calculateNumber").returns(10);
