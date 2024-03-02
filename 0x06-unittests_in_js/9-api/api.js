@@ -5,9 +5,9 @@ const app = express();
 app.get("/", (req, res) => res.end("Welcome to the payment system"));
 
 app.get("/cart/:id", (request, response) => {
-  const id = request.params["id"];
+  const id = request.params.id;
 
-  if (isNaN(id) || id < 1) {
+  if (!id || isNaN(id) || id < 1) {
     response.sendStatus(404);
     response.end();
   }
