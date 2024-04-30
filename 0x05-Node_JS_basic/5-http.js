@@ -38,9 +38,14 @@ function countStudents(studentDbFile) {
 
         let resultMsg = `Number of students: ${studentCounter}\n`;
 
+        let i = 0;
         for (const field of Object.keys(fields)) {
           resultMsg += `Number of students in ${field}: ${fields[field].count}. `
-                                + `List: ${fields[field].list}\n`;
+                                + `List: ${fields[field].list}`;
+
+          const fieldSize = Object.keys(fields).length;
+          i += 1;
+          if (i < fieldSize) resultMsg += '\n';
         }
         resolve(resultMsg);
       }
