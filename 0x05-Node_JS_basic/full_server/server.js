@@ -1,6 +1,6 @@
 // the application server
 import express from 'express';
-import router from './routes'; './routes/index';
+import router from './routes/index';
 
 const app = express();
 const indexRoutes = router;
