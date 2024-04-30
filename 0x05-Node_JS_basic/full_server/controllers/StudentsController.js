@@ -11,9 +11,12 @@ class StudentsController {
      */
   static getAllStudents(request, response) {
     const database = process.argv[2];
+
     readDatabase(database)
       .then((data) => {
         let respBody = 'This is the list of our students\n';
+
+        // sort the fields alphabetically
         const fieldOrder = Object.keys(data);
         fieldOrder.sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? 1 : -1));
 
@@ -36,10 +39,10 @@ class StudentsController {
           fieldIdx += 1;
           if (fieldIdx < fieldOrder.length) respBody += '\n';
         }
-        response.send(200, respBody);
+        return response.status(200).send(respBody);
       })
       .catch(() => {
-        response.send(500, 'Cannot load the database');
+        return response.status(500).send('Cannot load the database');
       });
   }
 
@@ -55,9 +58,14 @@ class StudentsController {
 
     if (['CS', 'SWE'].includes(major)) {
       const database = process.argv[2];
-      readDatabase(database)
+
+      return readDatabase(database)
         .then((data) => {
           const fieldStudents = data[major];
+
+          if (!fieldStudents) {
+            return response.status(500).send('Cannot load the database');
+          }
 
           let i = 0;
           let studentList = 'List: ';
@@ -68,13 +76,13 @@ class StudentsController {
             if (i < fieldStudents.length) studentList += ', ';
           }
 
-          response.send(200, studentList);
+          return response.status(200).send(studentList);
         })
         .catch(() => {
-          response.send(500, 'Cannot load the database');
+          return response.send(500, 'Cannot load the database');
         });
     } else {
-      response.send(500, 'Major parameter must be CS or SWE');
+      return response.status(500).send('Major parameter must be CS or SWE');
     }
   }
 }

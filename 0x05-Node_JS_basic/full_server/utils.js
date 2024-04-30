@@ -14,30 +14,33 @@ function readDatabase(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf-8', (err, data) => {
       if (err) {
-        reject(err);
-      }
+        reject(Error('Cannot load the database'));
+      } else {
 
-      const fileAsLines = data.split('\r\n');
-      const studArr = fileAsLines.splice(1); // student array
+        const fileAsLines = data.split('\r\n');
+        const studArr = fileAsLines.splice(1); // student array
 
-      const db = {};
+        const db = {};
 
-      for (const stud of studArr) {
-        const studInfo = stud.split(',');
-        const fieldName = studInfo[3];
+        for (const stud of studArr) {
+          if (stud.trim() !== '') {
+            const studInfo = stud.split(',');
+            const fieldName = studInfo[3];
 
-        if (fieldName) {
-          // update the db if the field already exists inside it
-          if (fieldName in db) {
-            db[fieldName].push(studInfo[0]);
-            // insert new field name into the db should it not exist.
-          } else {
-            db[fieldName] = [studInfo[0]]; // insert student's name
+            if (fieldName) {
+              // update the db if the field already exists inside it
+              if (fieldName in db) {
+                db[fieldName].push(studInfo[0]);
+                // insert new field name into the db should it not exist.
+              } else {
+                db[fieldName] = [studInfo[0]]; // insert student's name
+              }
+            }
           }
         }
-      }
 
-      resolve(db);
+        resolve(db);
+      }
     });
   });
 }

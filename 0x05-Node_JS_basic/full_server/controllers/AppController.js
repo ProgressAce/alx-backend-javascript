@@ -7,7 +7,7 @@ class AppController {
      * @param {import("express").Response} response
      */
   static getHomepage(request, response) {
-    response.send(200, 'Hello Holberton School!');
+    return response.status(200).send('Hello Holberton School!');
   }
 }
 
