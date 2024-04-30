@@ -6,9 +6,9 @@ function countStudents(studentDbFile) {
   return new Promise((resolve, reject) => {
     fs.readFile(studentDbFile, 'utf-8', (err, data) => {
       if (err) {
-        reject(new Error('Cannot load the database'));
+        reject(Error('Cannot load the database'));
       } else {
-        const fileArr = data.split('\r\n');
+        const fileArr = data.split('\n');
         const studentArr = fileArr.splice(1);
 
         let studentCounter = 0;
@@ -57,21 +57,17 @@ const app = express();
 app.listen(1245);
 
 app.get('/', (req, res) => {
-  res.end('Hello Holberton School!');
+  res.send('Hello Holberton School!');
 });
 
 app.get('/students', (req, res) => {
   countStudents(process.argv[2])
 
     .then((data) => {
-      const resMsg = `This is the list of our students\n${data}`;
-      res.write(resMsg);
-      res.end();
+      res.send(`This is the list of our students\n${data}`);
     })
     .catch((err) => {
-      res.statusCode = 500;
-      res.write(err.message);
-      res.end();
+      res.status(500).send(`This is the list of our students\n${err.message}`);
     });
 });
 

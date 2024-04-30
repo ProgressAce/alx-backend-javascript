@@ -8,7 +8,7 @@ function countStudents(studentDbFile) {
       if (err) {
         reject(new Error('Cannot load the database'));
       } else {
-        const fileArr = data.split('\r\n');
+        const fileArr = data.split('\n');
         const studentArr = fileArr.splice(1);
 
         let studentCounter = 0;
@@ -55,24 +55,21 @@ function countStudents(studentDbFile) {
 
 const app = http.createServer((req, res) => {
   if (req.url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
+    res.writeHead(200);
+    res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     countStudents(process.argv[2])
       .then((data) => {
-        const resMsg = `This is the list of our students\n${data}`;
-        res.write(resMsg);
-        res.end();
+        res.writeHead(200);
+        res.end(`This is the list of our students\n${data}`);
       })
       .catch((err) => {
-        res.statusCode = 500;
-        res.write(err.message);
-        res.end();
+        res.statusCode(500);
+        res.end(`This is the list of our students\n${err.message}`);
       });
   } else {
-    res.statusCode = 404;
-    res.write('Page not found');
-    res.end();
+    res.statusCode(404);
+    res.end('Not found');
   }
 });
 
