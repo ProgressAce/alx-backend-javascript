@@ -16,7 +16,6 @@ function readDatabase(filePath) {
       if (err) {
         reject(Error('Cannot load the database'));
       } else {
-
         const fileAsLines = data.split('\n');
         const studArr = fileAsLines.splice(1); // student array
 

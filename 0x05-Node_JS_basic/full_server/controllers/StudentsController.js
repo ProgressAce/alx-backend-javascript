@@ -41,9 +41,7 @@ class StudentsController {
         }
         return response.status(200).send(respBody);
       })
-      .catch(() => {
-        return response.status(500).send('Cannot load the database');
-      });
+      .catch(() => response.status(500).send('Cannot load the database'));
   }
 
   /**
@@ -78,12 +76,9 @@ class StudentsController {
 
           return response.status(200).send(studentList);
         })
-        .catch(() => {
-          return response.send(500, 'Cannot load the database');
-        });
-    } else {
-      return response.status(500).send('Major parameter must be CS or SWE');
+        .catch(() => response.send(500, 'Cannot load the database'));
     }
+    return response.status(500).send('Major parameter must be CS or SWE');
   }
 }
 

@@ -7,12 +7,12 @@ if (!process.stdin.isTTY) {
   process.stdin.on('data', (name) => {
     process.stdout.write(`Your name is: ${name}`);
     process.stdout.write('This important software is now closing\n');
-    process.exit(0);
+    process.exit();
   });
 } else {
   // the program waits for a name or argument from the terminal to be entered
   process.stdin.on('data', (name) => {
     process.stdout.write(`Your name is: ${name}`);
-    process.exit(0);
+    process.exit();
   });
 }
