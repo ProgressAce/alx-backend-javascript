@@ -64,11 +64,11 @@ const app = http.createServer((req, res) => {
         res.end(`This is the list of our students\n${data}`);
       })
       .catch((err) => {
-        res.statusCode(500);
+        res.statusCode = 500;
         res.end(`This is the list of our students\n${err.message}`);
       });
   } else {
-    res.statusCode(404);
+    res.statusCode = 404;
     res.end('Not found');
   }
 });
