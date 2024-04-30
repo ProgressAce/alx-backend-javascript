@@ -6,7 +6,7 @@ if (!process.stdin.isTTY) {
   // the program received an argument through piped data
   process.stdin.on('data', (name) => {
     process.stdout.write(`Your name is: ${name}`);
-    process.stdout.write('This important software is now closing');
+    process.stdout.write('This important software is now closing\n');
     process.exit(0);
   });
 } else {
