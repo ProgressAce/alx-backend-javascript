@@ -1,9 +1,5 @@
 function displayMessage(string) {
-  process.stdout.write(string + '\n', (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  console.log(string);
 }
 
 module.exports = displayMessage;
